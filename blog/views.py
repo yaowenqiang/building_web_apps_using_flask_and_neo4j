@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request
+from werkzeug.middleware.profiler import ProfilerMiddleware
 
 app = Flask(__name__)
+
+app.wsgi_app = ProfilerMiddleware(app.wsgi_app)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
